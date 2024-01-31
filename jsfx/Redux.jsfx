@@ -1,52 +1,50 @@
 desc:Redux
 author: lgx
-version: 1.3
+version: 1.0
 tags: Redux, BitCrusher
 
 slider1:in_bit=16<1,16,1>Bit Rate
-slider2:in_sr=40000<100,40000>Sample Rate
-slider3:mix=100<0,100,1>Dry/Wet
+slider2:in_sr=44000<100,44000>Sample Rate
+slider3:gain=1<0,2,0.1>Gain
 
-//@init
-  //clock_t = 0; // 采样时钟的时间间隔
-  //hold_left = 0; // 记录保持的采样值  左声道
-  //hold_right = 0; // 右声道
-  //step = 0; // 每次重采样的步长
-  //count = 0; // 记录已处理的样本个数
+@init
+  hold_left = 0; // 记录保持的采样值  左声道
+  hold_right = 0; // 右声道
+  count = 0; // 记录已处理的样本个数
+  step = 0; // 每次重采样的步长
 
 @slider
   bit_value = in_bit;
   sr_value = in_sr;
-  clock_t = 0; // 采样时钟的时间间隔
-  hold_left = 0; // 记录保持的采样值  左声道
-  hold_right = 0; // 右声道
-  step = 0; // 每次重采样的步长
-  count = 0; // 记录已处理的样本个数
-  clock_t = 1 / sr_value;
-  step = clock_t * srate;
+  hold_left = 0;
+  hold_right = 0;
+  count = 0;
+  step = 1 / sr_value * srate; 
+  
+
+@block
+  count = 0;
+  amp_value = 2 ^ (bit_value - 1);
 
 
 @sample
+  // bit recduction
+  s1 = floor(spl0 * amp_value) * (1 / amp_value);
+  s2 = floor(spl1 * amp_value) * (1 / amp_value);
 
+  // sample and hold
   count >= step ? (
     count = 0;
   );
-
   count == 0 ? (
     hold_left = spl0;
     hold_right = spl1;
   );
-
-  // bit recduction
-  amp_value = 2 ^ (bit_value - 1);
-  spl0 = ceil(spl0 * amp_value) * (1 / amp_value);
-  spl1 = ceil(spl1 * amp_value) * (1 / amp_value);
-
-  // sample and hold
-  spl0 = hold_left;
-  spl1 = hold_right;
-
-  spl0 *= mix / 100;
-  spl1 *= mix / 100;
-
+  s3 = hold_left;
+  s4 = hold_right;
   count += 1;
+
+  // gain
+  spl0 = ((s1 + s3) * 0.5) * gain;
+  spl1 = ((s2 + s4) * 0.5) * gain;
+
