@@ -1,7 +1,7 @@
 -- @description Create Regions
 -- @author lgx
 -- @version 1.0
--- @about
+-- @about Create regions from selected items.
 
 local function compareSegments(seg1, seg2)
     return seg1[1] < seg2[1]
