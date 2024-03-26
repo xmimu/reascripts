@@ -1,3 +1,8 @@
+-- @description Create Regions
+-- @author lgx
+-- @version 1.0
+-- @about
+
 local function compareSegments(seg1, seg2)
     return seg1[1] < seg2[1]
 end
@@ -28,7 +33,7 @@ local function mergeSegments(segments)
     return mergedSegments
 end
 
-function getItemData()
+local function getItemData()
     local num = reaper.CountSelectedMediaItems(0)
     if num == 0 then return end
     local segments = {}
@@ -45,7 +50,7 @@ function getItemData()
     return segments
 end
 
-function createRegions(segments)
+local function createRegions(segments)
   for _, segment in ipairs(segments) do
       reaper.AddProjectMarker(0, true, segment[1], segment[2], "", -1)
   end
