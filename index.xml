@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" commit="ffc5d1bb5b1b6b01669cf0d07bcb46b7e276cd95" name="lgx reascripts">
+<index version="1" commit="15478e25db4028a470fb009f1a8ce2abfd8dc3a5" name="lgx reascripts">
   <category name="jsfx">
     <reapack name="Redux.jsfx" type="effect" desc="Redux">
       <version name="1.3" author="lgx" time="2024-01-29T04:25:29Z">
@@ -7,6 +7,22 @@
       </version>
       <version name="1.0" author="lgx" time="2024-01-31T14:04:27Z">
         <source>https://github.com/xmimu/reascripts/raw/ffc5d1bb5b1b6b01669cf0d07bcb46b7e276cd95/jsfx/Redux.jsfx</source>
+      </version>
+    </reapack>
+  </category>
+  <category name="scripts">
+    <reapack name="xm_create_regions.lua" type="script" desc="Create Regions">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Create regions from selected items.\par}
+}
+]]></description>
+      </metadata>
+      <version name="1.0" author="lgx" time="2024-03-26T15:02:29Z">
+        <source main="main">https://github.com/xmimu/reascripts/raw/15478e25db4028a470fb009f1a8ce2abfd8dc3a5/scripts/xm_create_regions.lua</source>
       </version>
     </reapack>
   </category>
